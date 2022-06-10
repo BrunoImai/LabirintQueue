@@ -7,6 +7,7 @@ public class Labirint {
     int line = 1;
     int column = 1;
 
+
     Queue<String> queue = new LinkedList<String>();
 
     public boolean isWall() {
@@ -80,6 +81,7 @@ public class Labirint {
         String lastCommand = "";
         labirint.showMap();
         labirint.findEntrance();
+        boolean escaped = false;
 
         System.out.println("INSIRA OS COMANDOS EM ORDEM ATÉ CHEGAR AO 'S'");
         while (!lastCommand.toUpperCase().equals("INICIAR")) {
@@ -113,10 +115,15 @@ public class Labirint {
             }
             if (labirint.isExit()) {
                 System.out.println("VOCÊ ACHOU A SAIDA!");
+                escaped = true;
                 break;
             }
             labirint.map[oldLine][oldColumn] = " ";
             labirint.map[labirint.line][labirint.column] = "O";
+        }
+
+        if (!escaped) {
+            System.out.println("VOCÊ FICOU PRESO PARA SEMPRE E PERECEU...");
         }
     }
 }
